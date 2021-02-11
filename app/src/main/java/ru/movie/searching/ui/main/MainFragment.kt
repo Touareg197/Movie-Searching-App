@@ -19,8 +19,12 @@ class MainFragment : Fragment(), MovieListAdapter.OnMovieListener {
     }
 
     private lateinit var viewModel: MainViewModel
-    private lateinit var recommendedAdapter: MovieListAdapter
+
+    private lateinit var topRatedAdapter: MovieListAdapter
     private lateinit var popularAdapter: MovieListAdapter
+    private lateinit var nowPlayingAdapter: MovieListAdapter
+    private lateinit var latestAdapter: MovieListAdapter
+    private lateinit var upcomingAdapter: MovieListAdapter
 
     private lateinit var defaultMoviesList: List<Movie>
 
@@ -36,22 +40,33 @@ class MainFragment : Fragment(), MovieListAdapter.OnMovieListener {
     private fun initRecyclerViews(view: View) {
         defaultMoviesList = DefaultMoviesList.getDefaultMoviesList()
 
-        recommendedAdapter = MovieListAdapter(this)
+        topRatedAdapter = MovieListAdapter(this)
         popularAdapter = MovieListAdapter(this)
+        nowPlayingAdapter = MovieListAdapter(this)
+        latestAdapter = MovieListAdapter(this)
+        upcomingAdapter = MovieListAdapter(this)
 
-        val recommendedRecyclerView = view.recyclerview_recommended_movies
-        recommendedRecyclerView.adapter = recommendedAdapter
-
-        val popularRecyclerView = view.recyclerview_popular_movies
+        val topRatedRecyclerView = view.rv_top_rated_movies
+        topRatedRecyclerView.adapter = topRatedAdapter
+        val popularRecyclerView = view.rv_popular_movies
         popularRecyclerView.adapter = popularAdapter
+        val nowPlayingRecyclerView = view.rv_now_playing_movies
+        nowPlayingRecyclerView.adapter = nowPlayingAdapter
+        val latestRecyclerView = view.rv_latest_movies
+        latestRecyclerView.adapter = latestAdapter
+        val upcomingRecyclerView = view.rv_upcoming_movies
+        upcomingRecyclerView.adapter = upcomingAdapter
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
 
-        recommendedAdapter.setMoviesData(defaultMoviesList)
+        topRatedAdapter.setMoviesData(defaultMoviesList)
         popularAdapter.setMoviesData(defaultMoviesList)
+        nowPlayingAdapter.setMoviesData(defaultMoviesList)
+        latestAdapter.setMoviesData(defaultMoviesList)
+        upcomingAdapter.setMoviesData(defaultMoviesList)
     }
 
     override fun onMovieClick(movie: Movie) {
