@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">MovieSearchingApp</string>
+
+    <string name="main_title">Что будете смотреть сегодня ?</string>
+    <string name="enter_movie_name">Введите название</string>
+
+    <string name="recommended_movies">Рекомендуем</string>
+    <string name="popular_movies">Популярные</string>
+
 </resources>

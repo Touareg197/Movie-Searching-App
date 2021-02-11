@@ -5,6 +5,16 @@
     <color name="purple_700">#FF3700B3</color>
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
+
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="orange">#FFA500</color>
+
+    <color name="common_background_color">#779dca</color>
+
+    <color name="searchview_background_color">#9ebbd9</color>
+    <color name="searchview_text_color">#c1d8f6</color>
+
+    <color name="movies_background_color">#303845</color>
+
 </resources>
