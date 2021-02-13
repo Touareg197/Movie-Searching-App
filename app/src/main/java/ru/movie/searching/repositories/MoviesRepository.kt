@@ -1,14 +1,11 @@
 package ru.movie.searching.repositories
 
-import android.app.Application
 import retrofit2.Response
 import ru.movie.searching.data.entity.CommonMovieResponse
 import ru.movie.searching.data.network.MovieSearchingService
 import ru.movie.searching.utils.Constants
 
-class MoviesRepository(
-    application: Application
-) {
+class MoviesRepository {
 
     suspend fun getNowPlayingMoviesRemote(): Response<CommonMovieResponse> {
         return MovieSearchingService.api.getNowPlayingMovies(Constants.API_KEY, "ru-RU", 1)

@@ -13,10 +13,10 @@ class CreateMoviesViewModel(
     application: Application
 ) : AndroidViewModel(application) {
 
-    private val topRatedMoviesRepository: MoviesRepository = MoviesRepository(application)
-    private val popularMoviesRepository: MoviesRepository = MoviesRepository(application)
-    private val nowPlayingMoviesRepository: MoviesRepository = MoviesRepository(application)
-    private val upcomingMoviesRepository: MoviesRepository = MoviesRepository(application)
+    private val topRatedMoviesRepository: MoviesRepository = MoviesRepository()
+    private val popularMoviesRepository: MoviesRepository = MoviesRepository()
+    private val nowPlayingMoviesRepository: MoviesRepository = MoviesRepository()
+    private val upcomingMoviesRepository: MoviesRepository = MoviesRepository()
 
     var topRatedMovies = MutableLiveData<List<MovieModel>>()
     var popularMovies = MutableLiveData<List<MovieModel>>()

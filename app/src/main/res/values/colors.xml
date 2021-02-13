@@ -17,4 +17,7 @@
 
     <color name="movies_background_color">#303845</color>
 
+    <color name="rating_bar_active_color">#f3d165</color>
+    <color name="rating_bar_inactive_color">#91914D</color>
+
 </resources>

@@ -22,4 +22,9 @@
         <item name="android:textColorHint">@color/searchview_text_color</item>
     </style>
 
+    <style name="RatingBar" parent="Theme.AppCompat">
+        <item name="colorControlActivated">@color/rating_bar_active_color</item>
+        <item name="colorControlNormal">@color/rating_bar_inactive_color</item>
+    </style>
+
 </resources>

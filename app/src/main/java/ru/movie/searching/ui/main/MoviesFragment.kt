@@ -8,9 +8,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.snackbar.Snackbar
-import kotlinx.android.synthetic.main.main_fragment.view.*
+import kotlinx.android.synthetic.main.movies_fragment.view.*
 import ru.movie.searching.R
-import ru.movie.searching.data.DefaultMoviesList
 import ru.movie.searching.data.entity.MovieModel
 import ru.movie.searching.ui.main.viewModels.CreateMoviesViewModel
 import ru.movie.searching.ui.main.viewModels.CreateMoviesViewModelFactory
@@ -28,13 +27,11 @@ class MoviesFragment : Fragment(), MovieListAdapter.OnMovieListener {
     private lateinit var nowPlayingAdapter: MovieListAdapter
     private lateinit var upcomingAdapter: MovieListAdapter
 
-    private lateinit var defaultMoviesList: List<MovieModel>
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val view = inflater.inflate(R.layout.main_fragment, container, false)
+        val view = inflater.inflate(R.layout.movies_fragment, container, false)
         initRecyclerViews(view)
         viewModel = ViewModelProvider(
             this,
@@ -46,8 +43,6 @@ class MoviesFragment : Fragment(), MovieListAdapter.OnMovieListener {
     }
 
     private fun initRecyclerViews(view: View) {
-        defaultMoviesList = DefaultMoviesList.getDefaultMoviesList()
-
         topRatedAdapter = MovieListAdapter(this)
         popularAdapter = MovieListAdapter(this)
         nowPlayingAdapter = MovieListAdapter(this)
@@ -82,11 +77,6 @@ class MoviesFragment : Fragment(), MovieListAdapter.OnMovieListener {
             viewLifecycleOwner,
             Observer { upcomingAdapter.setMoviesData(it) }
         )
-
-//        topRatedAdapter.setMoviesData(defaultMoviesList)
-//        popularAdapter.setMoviesData(defaultMoviesList)
-//        nowPlayingAdapter.setMoviesData(defaultMoviesList)
-//        upcomingAdapter.setMoviesData(defaultMoviesList)
     }
 
     override fun onMovieClick(movie: MovieModel) {
