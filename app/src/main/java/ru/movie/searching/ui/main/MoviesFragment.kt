@@ -4,12 +4,15 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.snackbar.Snackbar
+import kotlinx.android.synthetic.main.movies_fragment.*
 import kotlinx.android.synthetic.main.movies_fragment.view.*
 import ru.movie.searching.R
+import ru.movie.searching.data.EmptyMoviesList
 import ru.movie.searching.data.entity.MovieModel
 import ru.movie.searching.ui.main.viewModels.CreateMoviesViewModel
 import ru.movie.searching.ui.main.viewModels.CreateMoviesViewModelFactory
@@ -27,6 +30,8 @@ class MoviesFragment : Fragment(), MovieListAdapter.OnMovieListener {
     private lateinit var nowPlayingAdapter: MovieListAdapter
     private lateinit var upcomingAdapter: MovieListAdapter
 
+    private lateinit var defaultMoviesList: List<MovieModel>
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -43,6 +48,8 @@ class MoviesFragment : Fragment(), MovieListAdapter.OnMovieListener {
     }
 
     private fun initRecyclerViews(view: View) {
+        defaultMoviesList = EmptyMoviesList.getEmptyMoviesList()
+
         topRatedAdapter = MovieListAdapter(this)
         popularAdapter = MovieListAdapter(this)
         nowPlayingAdapter = MovieListAdapter(this)
@@ -56,6 +63,11 @@ class MoviesFragment : Fragment(), MovieListAdapter.OnMovieListener {
         nowPlayingRecyclerView.adapter = nowPlayingAdapter
         val upcomingRecyclerView = view.rv_upcoming_movies
         upcomingRecyclerView.adapter = upcomingAdapter
+
+        topRatedAdapter.setMoviesData(defaultMoviesList)
+        popularAdapter.setMoviesData(defaultMoviesList)
+        nowPlayingAdapter.setMoviesData(defaultMoviesList)
+        upcomingAdapter.setMoviesData(defaultMoviesList)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -77,6 +89,28 @@ class MoviesFragment : Fragment(), MovieListAdapter.OnMovieListener {
             viewLifecycleOwner,
             Observer { upcomingAdapter.setMoviesData(it) }
         )
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        search_view.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(p0: String?): Boolean {
+                // TODO: work is here 1
+                return false
+            }
+
+            override fun onQueryTextChange(searchingMovie: String?): Boolean {
+                scroll_view.visibility = View.GONE
+                // TODO: work is here 2
+
+                if (searchingMovie.equals("")) {
+                    scroll_view.visibility = View.VISIBLE
+                }
+
+                return false
+            }
+        })
     }
 
     override fun onMovieClick(movie: MovieModel) {

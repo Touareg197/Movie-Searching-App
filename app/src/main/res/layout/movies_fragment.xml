@@ -37,10 +37,12 @@
         android:theme="@style/MySearchViewStyle" />
 
     <ScrollView
+        android:id="@+id/scroll_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/scrollview_rounded"
-        android:paddingBottom="20dp">
+        android:paddingBottom="20dp"
+        android:visibility="visible">
 
         <LinearLayout
             android:layout_width="match_parent"
