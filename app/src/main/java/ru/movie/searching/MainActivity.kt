@@ -2,7 +2,7 @@ package ru.movie.searching
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import ru.movie.searching.ui.main.MainFragment
+import ru.movie.searching.ui.main.MoviesFragment
 
 class MainActivity : AppCompatActivity() {
 
@@ -11,8 +11,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.main_activity)
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
-                    .replace(R.id.root_layout, MainFragment.newInstance())
-                    .commitNow()
+                .replace(R.id.root_layout, MoviesFragment.newInstance())
+                .commitNow()
         }
     }
 }

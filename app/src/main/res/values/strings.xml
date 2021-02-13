@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">MovieSearchingApp</string>
+    <string name="app_name">Поиск фильмов</string>
 
     <string name="main_title">Что будете смотреть сегодня ?</string>
     <string name="enter_movie_name">Введите название</string>
@@ -7,7 +7,6 @@
     <string name="top_rated_movies">Рекомендуем</string>
     <string name="popular_movies">Популярные</string>
     <string name="now_playing_movies">Сегодня в кино</string>
-    <string name="latest_movies">Новинки</string>
     <string name="upcoming_movies">Скоро в прокате</string>
 
 </resources>

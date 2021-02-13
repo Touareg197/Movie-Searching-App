@@ -15,7 +15,7 @@
         android:clickable="true"
         android:focusable="true"
         android:gravity="start"
-        android:scaleType="centerInside"
+        android:scaleType="fitStart"
         android:src="@drawable/example_1" />
 
     <TextView
@@ -23,11 +23,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
-        android:fontFamily="sans-serif-black"
+        android:fontFamily="sans-serif-condensed"
         android:gravity="start"
         android:textColor="@color/white"
         android:textSize="15sp"
-        tools:text="Здесь будет название фильма" />
+        tools:text="Название фильма" />
 
     <ImageView
         android:id="@+id/movie_rating"
