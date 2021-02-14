@@ -23,4 +23,8 @@ class MoviesRepository {
         return MovieSearchingService.api.getUpcomingMovies(Constants.API_KEY, "ru-RU", 1)
     }
 
+    suspend fun getSearchingMoviesRemote(searchingTitle: String?): Response<CommonMovieResponse> {
+        return MovieSearchingService.api.getSearchingMoviesRemote(Constants.API_KEY, "ru-RU", 1, searchingTitle)
+    }
+
 }

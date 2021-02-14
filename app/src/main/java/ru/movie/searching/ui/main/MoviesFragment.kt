@@ -30,6 +30,8 @@ class MoviesFragment : Fragment(), MovieListAdapter.OnMovieListener {
     private lateinit var nowPlayingAdapter: MovieListAdapter
     private lateinit var upcomingAdapter: MovieListAdapter
 
+    private lateinit var searchingAdapter: MovieListAdapter
+
     private lateinit var defaultMoviesList: List<MovieModel>
 
     override fun onCreateView(
@@ -55,6 +57,8 @@ class MoviesFragment : Fragment(), MovieListAdapter.OnMovieListener {
         nowPlayingAdapter = MovieListAdapter(this)
         upcomingAdapter = MovieListAdapter(this)
 
+        searchingAdapter = MovieListAdapter(this)
+
         val topRatedRecyclerView = view.rv_top_rated_movies
         topRatedRecyclerView.adapter = topRatedAdapter
         val popularRecyclerView = view.rv_popular_movies
@@ -63,6 +67,9 @@ class MoviesFragment : Fragment(), MovieListAdapter.OnMovieListener {
         nowPlayingRecyclerView.adapter = nowPlayingAdapter
         val upcomingRecyclerView = view.rv_upcoming_movies
         upcomingRecyclerView.adapter = upcomingAdapter
+
+        val searchingRecyclerView = view.rv_searching_movies
+        searchingRecyclerView.adapter = searchingAdapter
 
         topRatedAdapter.setMoviesData(defaultMoviesList)
         popularAdapter.setMoviesData(defaultMoviesList)
@@ -85,32 +92,56 @@ class MoviesFragment : Fragment(), MovieListAdapter.OnMovieListener {
             viewLifecycleOwner,
             Observer { nowPlayingAdapter.setMoviesData(it) }
         )
-        viewModel.upcomingMoviesMovies.observe(
+        viewModel.upcomingMovies.observe(
             viewLifecycleOwner,
             Observer { upcomingAdapter.setMoviesData(it) }
+        )
+        viewModel.searchingMovies.observe(
+            viewLifecycleOwner,
+            Observer { searchingAdapter.setMoviesData(it)
+            }
         )
     }
 
     override fun onResume() {
         super.onResume()
 
+//        search_view.setOnSearchClickListener {
+//            println("HERE")
+//        }
+
         search_view.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(p0: String?): Boolean {
-                // TODO: work is here 1
                 return false
             }
 
             override fun onQueryTextChange(searchingMovie: String?): Boolean {
-                scroll_view.visibility = View.GONE
-                // TODO: work is here 2
-
                 if (searchingMovie.equals("")) {
+                    search_view.clearFocus()
                     scroll_view.visibility = View.VISIBLE
+                    founded_movies.visibility = View.GONE
+                } else {
+                    founded_movies.visibility = View.VISIBLE
+                    scroll_view.visibility = View.GONE
+
+                    ///////////
+//                    viewModel.findMovieByTitle(searchingMovie)
+                    ///////////
+
                 }
 
                 return false
             }
         })
+
+//        search_view.setOnCloseListener(object : SearchView.OnCloseListener {
+//            override fun onClose(): Boolean {
+//                scroll_view.visibility = View.VISIBLE
+//                println("HERE")
+//                return false
+//            }
+//
+//        })
     }
 
     override fun onMovieClick(movie: MovieModel) {

@@ -27,4 +27,10 @@ interface MovieSearchingApiRest {
                                   @Query("language") language: String,
                                   @Query("page") page: Int): Response<CommonMovieResponse>
 
+    @GET("search/movie")
+    suspend fun getSearchingMoviesRemote(@Query("api_key") apiKey: String,
+                                  @Query("language") language: String,
+                                  @Query("page") page: Int,
+                                  @Query("query") searchingTitle: String?): Response<CommonMovieResponse>
+
 }
