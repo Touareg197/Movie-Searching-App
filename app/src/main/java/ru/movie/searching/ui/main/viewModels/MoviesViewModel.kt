@@ -17,17 +17,15 @@ class CreateMoviesViewModel(
     private val popularMoviesRepository: MoviesRepository = MoviesRepository()
     private val nowPlayingMoviesRepository: MoviesRepository = MoviesRepository()
     private val upcomingMoviesRepository: MoviesRepository = MoviesRepository()
-    ////////////
+
     private val searchingMoviesRepository: MoviesRepository = MoviesRepository()
-    ////////////
 
     var topRatedMovies = MutableLiveData<List<MovieModel>>()
     var popularMovies = MutableLiveData<List<MovieModel>>()
     var nowPlayingMovies = MutableLiveData<List<MovieModel>>()
     var upcomingMovies = MutableLiveData<List<MovieModel>>()
-    ////////////
+
     var searchingMovies = MutableLiveData<List<MovieModel>>()
-    ////////////
 
     init {
         receiveAllMovies()
@@ -39,9 +37,6 @@ class CreateMoviesViewModel(
             val popularMoviesResponse = popularMoviesRepository.getPopularMoviesRemote()
             val nowPlayingMoviesResponse = nowPlayingMoviesRepository.getNowPlayingMoviesRemote()
             val upcomingPlayingMoviesResponse = upcomingMoviesRepository.getUpcomingMoviesRemote()
-            ////////////
-            val searchingMoviesResponse = searchingMoviesRepository.getSearchingMoviesRemote("Avengers")
-            ////////////
             launch(Dispatchers.IO) {
                 if (topRatedMoviesResponse.isSuccessful) {
                     topRatedMovies.postValue(topRatedMoviesResponse.body()?.results)
@@ -55,17 +50,19 @@ class CreateMoviesViewModel(
                 if (upcomingPlayingMoviesResponse.isSuccessful) {
                     upcomingMovies.postValue(upcomingPlayingMoviesResponse.body()?.results)
                 }
-                ////////////
-                if (searchingMoviesResponse.isSuccessful) {
-                    searchingMovies.postValue(searchingMoviesResponse.body()?.results)
-                }
-                ////////////
             }
         }
     }
 
-    suspend fun findMovieByTitle(searchingTitle : String?) {
-        val searchingMoviesRepository = searchingMoviesRepository.getSearchingMoviesRemote(searchingTitle)
+    fun findMovieByTitle(searchingTitle: String?) {
+        viewModelScope.launch {
+            val searchingMoviesResponse =
+                searchingMoviesRepository.getSearchingMoviesRemote(searchingTitle)
+            launch(Dispatchers.IO) {
+                if (searchingMoviesResponse.isSuccessful) {
+                    searchingMovies.postValue(searchingMoviesResponse.body()?.results)
+                }
+            }
+        }
     }
-
 }

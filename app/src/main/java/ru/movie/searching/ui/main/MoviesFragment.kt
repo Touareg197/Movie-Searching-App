@@ -124,10 +124,7 @@ class MoviesFragment : Fragment(), MovieListAdapter.OnMovieListener {
                     founded_movies.visibility = View.VISIBLE
                     scroll_view.visibility = View.GONE
 
-                    ///////////
-//                    viewModel.findMovieByTitle(searchingMovie)
-                    ///////////
-
+                    viewModel.findMovieByTitle(searchingMovie)
                 }
 
                 return false

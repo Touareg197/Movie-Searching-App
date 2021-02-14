@@ -20,7 +20,7 @@ object MovieSearchingService {
             .build()
     }
 
-    val api: MovieSearchingApiRest by lazy {
+    val apiRest: MovieSearchingApiRest by lazy {
         retrofit.create(MovieSearchingApiRest::class.java)
     }
 }
