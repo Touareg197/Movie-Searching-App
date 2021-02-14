@@ -104,6 +104,8 @@ class MoviesFragment : Fragment(), MovieListAdapter.OnMovieListener {
                 searchingAdapter.setMoviesData(it)
             }
         )
+
+        viewModel.getLocallySavedMovies()
     }
 
     override fun onResume() {
