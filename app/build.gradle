@@ -5,7 +5,7 @@ plugins {
     id 'kotlin-kapt'
 }
 
-def room_version = "2.2.5"
+def room_version = "2.2.6"
 def retrofit_version = "2.9.0"
 
 android {
@@ -61,11 +61,9 @@ dependencies {
     // Room Database
     implementation "androidx.room:room-runtime:$room_version"
     implementation "androidx.room:room-ktx:$room_version"
+    kapt "androidx.room:room-compiler:$room_version"
 
     // Picasso
     implementation "com.squareup.picasso:picasso:2.71828"
-
-    // loaderviewlibrary
-    implementation 'com.elyeproj.libraries:loaderviewlibrary:2.0.0'
 
 }
