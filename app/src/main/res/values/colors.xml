@@ -9,6 +9,7 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="orange">#FFA500</color>
+    <color name="grey">#707881</color>
 
     <color name="common_background_color">#779dca</color>
 

@@ -16,11 +16,11 @@
 
     <ImageView
         android:id="@+id/movie_picture"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="160dp"
+        android:layout_height="240dp"
         android:focusable="true"
         android:gravity="start"
-        android:scaleType="fitStart"
+        android:scaleType="centerCrop"
         android:visibility="gone"
         tools:src="@drawable/example_1" />
 
@@ -41,6 +41,7 @@
         android:gravity="start"
         android:lines="1"
         android:maxLines="1"
+        android:paddingTop="10dp"
         android:singleLine="true"
         android:textColor="@color/white"
         android:textSize="15sp"
@@ -61,6 +62,8 @@
         android:layout_height="wrap_content"
         android:gravity="start"
         android:numStars="5"
+        android:paddingTop="5dp"
+        android:paddingBottom="10dp"
         android:rating="0"
         android:stepSize="0.5"
         android:theme="@style/RatingBar"

@@ -9,4 +9,6 @@
     <string name="now_playing_movies">Сегодня в кино</string>
     <string name="upcoming_movies">Скоро в прокате</string>
 
+    <string name="show_more">Ещё...</string>
+
 </resources>
