@@ -28,10 +28,10 @@ class CreateMoviesViewModel(
     var searchingMovies = MutableLiveData<List<MovieModel>>()
 
     init {
-        receiveAllMovies()
+
     }
 
-    fun receiveAllMovies() {
+    fun getMoviesFromServer() {
         viewModelScope.launch {
             val topRatedMoviesResponse = topRatedMoviesRepository.getTopRatedMoviesRemote()
             val popularMoviesResponse = popularMoviesRepository.getPopularMoviesRemote()

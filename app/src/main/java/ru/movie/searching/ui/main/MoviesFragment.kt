@@ -106,7 +106,15 @@ class MoviesFragment : Fragment(), MovieListAdapter.OnMovieListener {
         )
 
         initMoreButtons()
+
         viewModel.getLocallySavedMovies()
+        if ((activity as MainActivity?)!!.isNetworkConnected()) {
+            viewModel.getMoviesFromServer()
+        } else {
+            view?.let {
+                Snackbar.make(it, "Нет доступа в Интернет", Snackbar.LENGTH_SHORT).show()
+            }
+        }
     }
 
     private fun initMoreButtons() {
@@ -154,7 +162,14 @@ class MoviesFragment : Fragment(), MovieListAdapter.OnMovieListener {
                     founded_movies.visibility = View.VISIBLE
                     scroll_view.visibility = View.GONE
 
-                    viewModel.findMovieByTitle(searchingMovie)
+                    if ((activity as MainActivity?)!!.isNetworkConnected()) {
+                        viewModel.findMovieByTitle(searchingMovie)
+                    } else {
+                        view?.let {
+                            Snackbar.make(it, "Нет доступа в Интернет", Snackbar.LENGTH_SHORT)
+                                .show()
+                        }
+                    }
                 }
 
                 return false
