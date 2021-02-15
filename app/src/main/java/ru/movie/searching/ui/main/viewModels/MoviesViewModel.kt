@@ -20,18 +20,24 @@ class CreateMoviesViewModel(
 
     private val searchingMoviesRepository: MoviesRepository = MoviesRepository(application)
 
-    var topRatedMovies = MutableLiveData<List<MovieModel>>()
-    var popularMovies = MutableLiveData<List<MovieModel>>()
-    var nowPlayingMovies = MutableLiveData<List<MovieModel>>()
-    var upcomingMovies = MutableLiveData<List<MovieModel>>()
+    var topRatedMoviesLiveData = MutableLiveData<List<MovieModel>>()
+    var popularMoviesLiveData = MutableLiveData<List<MovieModel>>()
+    var nowPlayingMoviesLiveData = MutableLiveData<List<MovieModel>>()
+    var upcomingMoviesLiveData = MutableLiveData<List<MovieModel>>()
 
-    var searchingMovies = MutableLiveData<List<MovieModel>>()
+    var searchingMoviesLiveData = MutableLiveData<List<MovieModel>>()
+
+    var refreshInProgressLiveData = MutableLiveData<Boolean>()
 
     init {
 
     }
 
-    fun getMoviesFromServer() {
+    fun getMoviesFromServer(manualRefresh: Boolean) {
+        if (manualRefresh) {
+            refreshInProgressLiveData.postValue(true)
+        }
+
         viewModelScope.launch {
             val topRatedMoviesResponse = topRatedMoviesRepository.getTopRatedMoviesRemote()
             val popularMoviesResponse = popularMoviesRepository.getPopularMoviesRemote()
@@ -39,36 +45,40 @@ class CreateMoviesViewModel(
             val upcomingPlayingMoviesResponse = upcomingMoviesRepository.getUpcomingMoviesRemote()
             launch(Dispatchers.IO) {
                 if (topRatedMoviesResponse.isSuccessful) {
-                    topRatedMovies.postValue(topRatedMoviesResponse.body()?.results)
+                    topRatedMoviesLiveData.postValue(topRatedMoviesResponse.body()?.results)
                     topRatedMoviesRepository.putTopRatedMoviesListLocal(
                         convertTopRatedMovieModelToMovieData(
                             topRatedMoviesResponse.body()?.results
                         )
                     )
+                    refreshInProgressLiveData.postValue(false)
                 }
                 if (popularMoviesResponse.isSuccessful) {
-                    popularMovies.postValue(popularMoviesResponse.body()?.results)
+                    popularMoviesLiveData.postValue(popularMoviesResponse.body()?.results)
                     popularMoviesRepository.putPopularMoviesListLocal(
                         convertPopularMovieModelToMovieData(
                             popularMoviesResponse.body()?.results
                         )
                     )
+                    refreshInProgressLiveData.postValue(false)
                 }
                 if (nowPlayingMoviesResponse.isSuccessful) {
-                    nowPlayingMovies.postValue(nowPlayingMoviesResponse.body()?.results)
+                    nowPlayingMoviesLiveData.postValue(nowPlayingMoviesResponse.body()?.results)
                     nowPlayingMoviesRepository.putNowPlayingMoviesListLocal(
                         convertNowPlayingMovieModelToMovieData(
                             nowPlayingMoviesResponse.body()?.results
                         )
                     )
+                    refreshInProgressLiveData.postValue(false)
                 }
                 if (upcomingPlayingMoviesResponse.isSuccessful) {
-                    upcomingMovies.postValue(upcomingPlayingMoviesResponse.body()?.results)
+                    upcomingMoviesLiveData.postValue(upcomingPlayingMoviesResponse.body()?.results)
                     upcomingMoviesRepository.putUpcomingMoviesListLocal(
                         convertUpcomingMovieModelToMovieData(
                             upcomingPlayingMoviesResponse.body()?.results
                         )
                     )
+                    refreshInProgressLiveData.postValue(false)
                 }
             }
         }
@@ -80,7 +90,7 @@ class CreateMoviesViewModel(
                 searchingMoviesRepository.getSearchingMoviesRemote(searchingTitle)
             launch(Dispatchers.IO) {
                 if (searchingMoviesResponse.isSuccessful) {
-                    searchingMovies.postValue(searchingMoviesResponse.body()?.results)
+                    searchingMoviesLiveData.postValue(searchingMoviesResponse.body()?.results)
                 }
             }
         }
@@ -98,16 +108,16 @@ class CreateMoviesViewModel(
         moviesUpcomingList.addAll(convertUpcomingMovieDataToMovieModel(upcomingMoviesRepository.getUpcomingMoviesListLocal()))
 
         if (!moviesTopRatedList.isEmpty()) {
-            topRatedMovies.postValue(moviesTopRatedList)
+            topRatedMoviesLiveData.postValue(moviesTopRatedList)
         }
         if (!moviesPopularList.isEmpty()) {
-            popularMovies.postValue(moviesPopularList)
+            popularMoviesLiveData.postValue(moviesPopularList)
         }
         if (!moviesNowPlayingList.isEmpty()) {
-            nowPlayingMovies.postValue(moviesNowPlayingList)
+            nowPlayingMoviesLiveData.postValue(moviesNowPlayingList)
         }
         if (!moviesUpcomingList.isEmpty()) {
-            upcomingMovies.postValue(moviesUpcomingList)
+            upcomingMoviesLiveData.postValue(moviesUpcomingList)
         }
     }
 

@@ -3,231 +3,245 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/common_background_color"
-    android:clickable="true"
-    android:focusable="true"
-    android:focusableInTouchMode="true"
-    android:orientation="vertical">
-
-    <TextView
-        android:id="@+id/main_title"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="20dp"
-        android:fontFamily="sans-serif-black"
-        android:gravity="start"
-        android:maxLines="2"
-        android:text="@string/main_title"
-        android:textColor="@color/white"
-        android:textSize="25sp" />
-
-    <SearchView
-        android:id="@+id/search_view"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="25dp"
-        android:layout_marginBottom="35dp"
-        android:background="@drawable/searchview_rounded"
-        android:closeIcon="@drawable/ic_search_close"
-        android:gravity="center_vertical"
-        android:iconifiedByDefault="false"
-        android:queryHint="@string/enter_movie_name"
-        android:searchIcon="@drawable/ic_search_icon"
-        android:theme="@style/MySearchViewStyle" />
+    android:layout_height="match_parent">
 
     <LinearLayout
-        android:id="@+id/founded_movies"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/scrollview_rounded"
-        android:orientation="vertical"
-        android:visibility="gone">
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_searching_movies"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="20dp"
-            app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
-            app:spanCount="2"
-            tools:listitem="@layout/item_movie" />
-    </LinearLayout>
-
-    <ScrollView
-        android:id="@+id/scroll_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/scrollview_rounded"
-        android:paddingBottom="20dp"
-        android:visibility="visible">
+        android:background="@color/common_background_color"
+        android:clickable="true"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/main_title"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="20dp"
+            android:fontFamily="sans-serif-black"
+            android:gravity="start"
+            android:maxLines="2"
+            android:text="@string/main_title"
+            android:textColor="@color/white"
+            android:textSize="25sp" />
+
+        <SearchView
+            android:id="@+id/search_view"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="25dp"
+            android:layout_marginBottom="35dp"
+            android:background="@drawable/searchview_rounded"
+            android:closeIcon="@drawable/ic_search_close"
+            android:fillViewport="true"
+            android:gravity="center_vertical"
+            android:iconifiedByDefault="false"
+            android:queryHint="@string/enter_movie_name"
+            android:searchIcon="@drawable/ic_search_icon"
+            android:theme="@style/MySearchViewStyle" />
 
         <LinearLayout
+            android:id="@+id/founded_movies"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="25dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginBottom="20dp"
-                    android:layout_weight="80"
-                    android:fontFamily="sans-serif-black"
-                    android:text="@string/top_rated_movies"
-                    android:textColor="@color/white"
-                    android:textSize="18sp" />
-
-                <TextView
-                    android:id="@+id/more_top_rated_movies"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginBottom="20dp"
-                    android:layout_weight="20"
-                    android:fontFamily="sans-serif-black"
-                    android:text="@string/show_more"
-                    android:textColor="@color/grey"
-                    android:textSize="14sp" />
-            </LinearLayout>
+            android:background="@drawable/scrollview_rounded"
+            android:orientation="vertical"
+            android:visibility="gone">
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_top_rated_movies"
+                android:id="@+id/rv_searching_movies"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                app:reverseLayout="false"
+                android:layout_height="match_parent"
+                android:layout_marginTop="20dp"
+                app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
+                app:spanCount="2"
                 tools:listitem="@layout/item_movie" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="25dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginBottom="20dp"
-                    android:layout_weight="80"
-                    android:fontFamily="sans-serif-black"
-                    android:text="@string/popular_movies"
-                    android:textColor="@color/white"
-                    android:textSize="18sp" />
-
-                <TextView
-                    android:id="@+id/more_popular_movies"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginBottom="20dp"
-                    android:layout_weight="20"
-                    android:fontFamily="sans-serif-black"
-                    android:text="@string/show_more"
-                    android:textColor="@color/grey"
-                    android:textSize="14sp" />
-            </LinearLayout>
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_popular_movies"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                app:reverseLayout="false"
-                tools:listitem="@layout/item_movie" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="25dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginBottom="20dp"
-                    android:layout_weight="80"
-                    android:fontFamily="sans-serif-black"
-                    android:text="@string/now_playing_movies"
-                    android:textColor="@color/white"
-                    android:textSize="18sp" />
-
-                <TextView
-                    android:id="@+id/more_now_playing_movies"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginBottom="20dp"
-                    android:layout_weight="20"
-                    android:fontFamily="sans-serif-black"
-                    android:text="@string/show_more"
-                    android:textColor="@color/grey"
-                    android:textSize="14sp" />
-            </LinearLayout>
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_now_playing_movies"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                app:reverseLayout="false"
-                tools:listitem="@layout/item_movie" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="25dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginBottom="20dp"
-                    android:layout_weight="80"
-                    android:fontFamily="sans-serif-black"
-                    android:text="@string/upcoming_movies"
-                    android:textColor="@color/white"
-                    android:textSize="18sp" />
-
-                <TextView
-                    android:id="@+id/more_upcoming_movies"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginBottom="20dp"
-                    android:layout_weight="20"
-                    android:fontFamily="sans-serif-black"
-                    android:text="@string/show_more"
-                    android:textColor="@color/grey"
-                    android:textSize="14sp" />
-            </LinearLayout>
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_upcoming_movies"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                app:reverseLayout="false"
-                tools:listitem="@layout/item_movie" />
-
         </LinearLayout>
 
-    </ScrollView>
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/swipe_refresh_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ScrollView
+                android:id="@+id/scroll_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/scrollview_rounded"
+                android:paddingBottom="20dp"
+                android:visibility="visible">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="25dp"
+                            android:layout_marginTop="20dp"
+                            android:layout_marginBottom="20dp"
+                            android:layout_weight="80"
+                            android:fontFamily="sans-serif-black"
+                            android:text="@string/top_rated_movies"
+                            android:textColor="@color/white"
+                            android:textSize="18sp" />
+
+                        <TextView
+                            android:id="@+id/more_top_rated_movies"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="20dp"
+                            android:layout_marginBottom="20dp"
+                            android:layout_weight="20"
+                            android:fontFamily="sans-serif-black"
+                            android:text="@string/show_more"
+                            android:textColor="@color/grey"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rv_top_rated_movies"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        app:reverseLayout="false"
+                        tools:listitem="@layout/item_movie" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="25dp"
+                            android:layout_marginTop="20dp"
+                            android:layout_marginBottom="20dp"
+                            android:layout_weight="80"
+                            android:fontFamily="sans-serif-black"
+                            android:text="@string/popular_movies"
+                            android:textColor="@color/white"
+                            android:textSize="18sp" />
+
+                        <TextView
+                            android:id="@+id/more_popular_movies"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="20dp"
+                            android:layout_marginBottom="20dp"
+                            android:layout_weight="20"
+                            android:fontFamily="sans-serif-black"
+                            android:text="@string/show_more"
+                            android:textColor="@color/grey"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rv_popular_movies"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        app:reverseLayout="false"
+                        tools:listitem="@layout/item_movie" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="25dp"
+                            android:layout_marginTop="20dp"
+                            android:layout_marginBottom="20dp"
+                            android:layout_weight="80"
+                            android:fontFamily="sans-serif-black"
+                            android:text="@string/now_playing_movies"
+                            android:textColor="@color/white"
+                            android:textSize="18sp" />
+
+                        <TextView
+                            android:id="@+id/more_now_playing_movies"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="20dp"
+                            android:layout_marginBottom="20dp"
+                            android:layout_weight="20"
+                            android:fontFamily="sans-serif-black"
+                            android:text="@string/show_more"
+                            android:textColor="@color/grey"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rv_now_playing_movies"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        app:reverseLayout="false"
+                        tools:listitem="@layout/item_movie" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="25dp"
+                            android:layout_marginTop="20dp"
+                            android:layout_marginBottom="20dp"
+                            android:layout_weight="80"
+                            android:fontFamily="sans-serif-black"
+                            android:text="@string/upcoming_movies"
+                            android:textColor="@color/white"
+                            android:textSize="18sp" />
+
+                        <TextView
+                            android:id="@+id/more_upcoming_movies"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="20dp"
+                            android:layout_marginBottom="20dp"
+                            android:layout_weight="20"
+                            android:fontFamily="sans-serif-black"
+                            android:text="@string/show_more"
+                            android:textColor="@color/grey"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rv_upcoming_movies"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        app:reverseLayout="false"
+                        tools:listitem="@layout/item_movie" />
+
+                </LinearLayout>
+
+            </ScrollView>
+
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+    </LinearLayout>
 
 </LinearLayout>

@@ -82,34 +82,12 @@ class MoviesFragment : Fragment(), MovieListAdapter.OnMovieListener {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        viewModel.topRatedMovies.observe(
-            viewLifecycleOwner,
-            Observer { topRatedAdapter.setMoviesData(it) }
-        )
-        viewModel.popularMovies.observe(
-            viewLifecycleOwner,
-            Observer { popularAdapter.setMoviesData(it) }
-        )
-        viewModel.nowPlayingMovies.observe(
-            viewLifecycleOwner,
-            Observer { nowPlayingAdapter.setMoviesData(it) }
-        )
-        viewModel.upcomingMovies.observe(
-            viewLifecycleOwner,
-            Observer { upcomingAdapter.setMoviesData(it) }
-        )
-        viewModel.searchingMovies.observe(
-            viewLifecycleOwner,
-            Observer {
-                searchingAdapter.setMoviesData(it)
-            }
-        )
-
-        initMoreButtons()
+        initLiveDataSubscription()
+        initListeners()
 
         viewModel.getLocallySavedMovies()
         if ((activity as MainActivity?)!!.isNetworkConnected()) {
-            viewModel.getMoviesFromServer()
+            viewModel.getMoviesFromServer(false)
         } else {
             view?.let {
                 Snackbar.make(it, "Нет доступа в Интернет", Snackbar.LENGTH_SHORT).show()
@@ -117,10 +95,54 @@ class MoviesFragment : Fragment(), MovieListAdapter.OnMovieListener {
         }
     }
 
-    private fun initMoreButtons() {
+    private fun initLiveDataSubscription() {
+        viewModel.topRatedMoviesLiveData.observe(
+            viewLifecycleOwner,
+            Observer { topRatedAdapter.setMoviesData(it) }
+        )
+        viewModel.popularMoviesLiveData.observe(
+            viewLifecycleOwner,
+            Observer { popularAdapter.setMoviesData(it) }
+        )
+        viewModel.nowPlayingMoviesLiveData.observe(
+            viewLifecycleOwner,
+            Observer { nowPlayingAdapter.setMoviesData(it) }
+        )
+        viewModel.upcomingMoviesLiveData.observe(
+            viewLifecycleOwner,
+            Observer { upcomingAdapter.setMoviesData(it) }
+        )
+        viewModel.searchingMoviesLiveData.observe(
+            viewLifecycleOwner,
+            Observer {
+                searchingAdapter.setMoviesData(it)
+            }
+        )
+
+        viewModel.refreshInProgressLiveData.observe(
+            viewLifecycleOwner,
+            Observer {
+                if (it == false) {
+                    swipe_refresh_layout.isRefreshing = false
+                }
+            }
+        )
+    }
+
+    private fun initListeners() {
 //        search_view.setOnFocusChangeListener { v, hasFocus ->
 //            println(hasFocus)
 //        }
+
+        swipe_refresh_layout.setOnRefreshListener {
+            if ((activity as MainActivity?)!!.isNetworkConnected()) {
+                viewModel.getMoviesFromServer(true)
+            } else {
+                view?.let {
+                    Snackbar.make(it, "Нет доступа в Интернет", Snackbar.LENGTH_SHORT).show()
+                }
+            }
+        }
 
         more_top_rated_movies.setOnClickListener {
             view?.let {
