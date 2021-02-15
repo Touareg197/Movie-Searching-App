@@ -81,6 +81,7 @@ class MoviesFragment : Fragment(), MovieListAdapter.OnMovieListener {
         searchingAdapter.setMoviesData(defaultMoviesList)
     }
 
+    // TODO: Вынести строку ниже в ресурсы
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
@@ -132,11 +133,8 @@ class MoviesFragment : Fragment(), MovieListAdapter.OnMovieListener {
         )
     }
 
+    // TODO: Вынести строки ниже в ресурсы
     private fun initListeners() {
-//        search_view.setOnFocusChangeListener { v, hasFocus ->
-//            println(hasFocus)
-//        }
-
         swipe_refresh_layout.setOnRefreshListener {
             if ((activity as MainActivity?)!!.isNetworkConnected()) {
                 viewModel.getMoviesFromServer(true)
@@ -173,6 +171,7 @@ class MoviesFragment : Fragment(), MovieListAdapter.OnMovieListener {
     override fun onResume() {
         super.onResume()
 
+        // TODO: Убрать подчеркивание под SearchView
         search_view.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(searchingMovie: String?): Boolean {
                 (activity as MainActivity?)!!.closeKeyBoard()
