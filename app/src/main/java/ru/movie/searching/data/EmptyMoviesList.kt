@@ -16,6 +16,7 @@ class EmptyMoviesList {
             emptyMoviesList.add(MovieModel("empty", "empty", 1.0))
             emptyMoviesList.add(MovieModel("empty", "empty", 1.0))
             emptyMoviesList.add(MovieModel("empty", "empty", 1.0))
+            emptyMoviesList.add(MovieModel("empty", "empty", 1.0))
         }
 
     }

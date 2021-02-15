@@ -77,6 +77,8 @@ class MoviesFragment : Fragment(), MovieListAdapter.OnMovieListener {
         popularAdapter.setMoviesData(defaultMoviesList)
         nowPlayingAdapter.setMoviesData(defaultMoviesList)
         upcomingAdapter.setMoviesData(defaultMoviesList)
+
+        searchingAdapter.setMoviesData(defaultMoviesList)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -91,6 +93,7 @@ class MoviesFragment : Fragment(), MovieListAdapter.OnMovieListener {
         } else {
             view?.let {
                 Snackbar.make(it, "Нет доступа в Интернет", Snackbar.LENGTH_SHORT).show()
+                swipe_refresh_layout.isRefreshing = false
             }
         }
     }
@@ -140,6 +143,7 @@ class MoviesFragment : Fragment(), MovieListAdapter.OnMovieListener {
             } else {
                 view?.let {
                     Snackbar.make(it, "Нет доступа в Интернет", Snackbar.LENGTH_SHORT).show()
+                    swipe_refresh_layout.isRefreshing = false
                 }
             }
         }
@@ -176,6 +180,7 @@ class MoviesFragment : Fragment(), MovieListAdapter.OnMovieListener {
             }
 
             override fun onQueryTextChange(searchingMovie: String?): Boolean {
+                // TODO: Реализовать механизм задержки при вводе символов
                 if (searchingMovie.equals("")) {
                     search_view.clearFocus()
                     scroll_view.visibility = View.VISIBLE
@@ -190,6 +195,7 @@ class MoviesFragment : Fragment(), MovieListAdapter.OnMovieListener {
                         view?.let {
                             Snackbar.make(it, "Нет доступа в Интернет", Snackbar.LENGTH_SHORT)
                                 .show()
+                            swipe_refresh_layout.isRefreshing = false
                         }
                     }
                 }
